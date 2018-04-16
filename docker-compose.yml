@@ -1,7 +1,7 @@
 version: '2'
 services:
   adapter:
-    image: 3846masa/nginx-omniauth-adapter
+    image: david510c/nginx-omniauth-adapter
     build: ./adapter
     ports:
       - "80:8080"
