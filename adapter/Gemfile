@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'nginx_omniauth_adapter'
 gem 'omniauth-github'
-gem 'omniauth-slack',
-    :git => 'git://github.com/3846masa/omniauth-slack.git',
-    :branch => 'signin-with-slack-support'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
 gem 'unicorn'
