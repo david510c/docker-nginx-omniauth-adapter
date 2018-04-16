@@ -44,12 +44,12 @@ use OmniAuth::Builder do
     config.full_host = ENV['NGX_OMNIAUTH_HOST']
   end
 
-  if ENV['NGX_OMNIAUTH_SLACK_KEY'] && ENV['NGX_OMNIAUTH_SLACK_SECRET']
-    require 'omniauth-slack'
-    team_id = ENV['NGX_OMNIAUTH_SLACK_TEAM_ID'] || nil
-    provider :slack, ENV['NGX_OMNIAUTH_SLACK_KEY'], ENV['NGX_OMNIAUTH_SLACK_SECRET'], scope: 'identity.basic', team: team_id
-    providers << :slack
-  end
+ # if ENV['NGX_OMNIAUTH_SLACK_KEY'] && ENV['NGX_OMNIAUTH_SLACK_SECRET']
+ #   require 'omniauth-slack'
+ #   team_id = ENV['NGX_OMNIAUTH_SLACK_TEAM_ID'] || nil
+ #   provider :slack, ENV['NGX_OMNIAUTH_SLACK_KEY'], ENV['NGX_OMNIAUTH_SLACK_SECRET'], scope: 'identity.basic', team: team_id
+ #   providers << :slack
+ # end
 
   if ENV['NGX_OMNIAUTH_GOOGLE_KEY'] && ENV['NGX_OMNIAUTH_GOOGLE_SECRET']
     require 'omniauth-google-oauth2'
@@ -85,11 +85,12 @@ run NginxOmniauthAdapter.app(
   app_refresh_interval: ENV['NGX_OMNIAUTH_APP_REFRESH_INTERVAL'] && ENV['NGX_OMNIAUTH_APP_REFRESH_INTERVAL'].to_i,
   adapter_refresh_interval: ENV['NGX_OMNIAUTH_ADAPTER_REFRESH_INTERVAL'] && ENV['NGX_OMNIAUTH_APP_REFRESH_INTERVAL'].to_i,
   policy_proc: proc {
-    if current_user[:provider] == 'slack' && ENV['NGX_OMNIAUTH_SLACK_TEAM_ID']
-      unless (current_user[:info].team_id == ENV['NGX_OMNIAUTH_SLACK_TEAM_ID'])
-        next false
-      end
-    end
+  
+  #  if current_user[:provider] == 'slack' && ENV['NGX_OMNIAUTH_SLACK_TEAM_ID']
+  #    unless (current_user[:info].team_id == ENV['NGX_OMNIAUTH_SLACK_TEAM_ID'])
+  #      next false
+  #    end
+  #  end
 
     if current_user[:provider] == 'github'
       if gh_teams
