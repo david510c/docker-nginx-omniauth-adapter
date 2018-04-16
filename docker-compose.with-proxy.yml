@@ -10,7 +10,7 @@ services:
     links:
       - adapter
   adapter:
-    image: 3846masa/nginx-omniauth-adapter
+    image: david510c/nginx-omniauth-adapter
     build: ./adapter
     env_file:
       - auth.env
