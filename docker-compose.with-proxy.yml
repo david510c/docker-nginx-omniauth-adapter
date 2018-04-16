@@ -4,9 +4,12 @@ services:
     image: jwilder/nginx-proxy:alpine
     ports:
       - "80:80"
+      - "443:443"
     volumes:
-      - ./vhost.d:/etc/nginx/vhost.d:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /mnt/docker/acme/default:/etc/nginx/certs
+      - /mnt/docker/nginx/conf.d:/etc/nginx/conf.d
+      - /mnt/docker/nginx/vhost.d:/etc/nginx/vhost.d:ro
     links:
       - adapter
   adapter:
