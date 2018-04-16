@@ -51,6 +51,12 @@ use OmniAuth::Builder do
     providers << :slack
   end
 
+  if ENV['NGX_OMNIAUTH_GOOGLE_KEY'] && ENV['NGX_OMNIAUTH_GOOGLE_SECRET']
+    require 'omniauth-google-oauth2'
+    provider :google_oauth2, ENV['NGX_OMNIAUTH_GOOGLE_KEY'], ENV['NGX_OMNIAUTH_GOOGLE_SECRET'], hd: ENV['NGX_OMNIAUTH_GOOGLE_HD']
+    providers << :google_oauth2
+  end
+  
   if ENV['NGX_OMNIAUTH_GITHUB_KEY'] && ENV['NGX_OMNIAUTH_GITHUB_SECRET']
     require 'omniauth-github'
     gh_client_options = {}
