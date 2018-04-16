@@ -13,7 +13,7 @@ services:
     links:
       - adapter
   adapter:
-    image: david510c/nginx-omniauth-adapter
+    image: david510c/docker-nginx-omniauth-adapter
     build: ./adapter
     env_file:
       - auth.env
